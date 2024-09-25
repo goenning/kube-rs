@@ -629,6 +629,8 @@ fn auth_exec(auth: &ExecConfig) -> Result<ExecCredential, Error> {
     }
     let creds = serde_json::from_slice(&out.stdout).map_err(Error::AuthExecParse)?;
 
+    tracing::debug!("exec plugin response: {:?}", creds);
+
     Ok(creds)
 }
 
