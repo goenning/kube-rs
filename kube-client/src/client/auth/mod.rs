@@ -619,6 +619,8 @@ fn auth_exec(auth: &ExecConfig) -> Result<ExecCredential, Error> {
         cmd.creation_flags(CREATE_NO_WINDOW);
     }
 
+    tracing::debug!("executing command: {:?}", cmd);
+
     let out = cmd.output().map_err(Error::AuthExecStart)?;
     if !out.status.success() {
         return Err(Error::AuthExecRun {
